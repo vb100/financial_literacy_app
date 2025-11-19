@@ -14,3 +14,11 @@ This directory contains the FastAPI backend responsible for fetching, summarizin
    ```bash
    uvicorn app.main:app --reload
    ```
+
+## Troubleshooting
+
+- **`ModuleNotFoundError: No module named 'sqlmodel'`** – this means your current
+  environment was set up before the latest dependencies were added. Re-run
+  `pip install -r requirements.txt` (or simply `pip install sqlmodel`) inside
+  your virtual environment to pull in the missing package, then restart the
+  server.
