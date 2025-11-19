@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.env
+.env.*
+venv/
+.venv/
+.env_atgimimas/
+backend/career_feed.db
+backend/.env
+backend/.env.*
+
+# Node / React Native
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.expo/
+.expo-shared/
+.DS_Store
+
+# SQLite databases
+*.db
+*.sqlite3
+*.sqlite
