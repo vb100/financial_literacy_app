@@ -11,7 +11,7 @@ settings = get_settings()
 
 
 @asynccontextmanager
-def lifespan(_: FastAPI):
+async def lifespan(_: FastAPI):
     """Application lifespan hook to ensure tables exist before serving traffic."""
 
     init_db()
