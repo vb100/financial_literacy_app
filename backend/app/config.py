@@ -1,22 +1,19 @@
 """Application configuration models."""
 from functools import lru_cache
-
-from pydantic import Field
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import BaseSettings, Field
 
 
 class Settings(BaseSettings):
-    """Central application settings pulled from environment variables."""
+    """Central application settings."""
 
-    serper_api_key: str = Field(default="", description="Serper.dev API key")
-    openai_api_key: str = Field(default="", description="OpenAI API key")
-    database_url: str = Field(
-        default="sqlite:///./career_feed.db",
-        description="SQLAlchemy-compatible database URL",
-    )
-    admin_token: str = Field(default="", description="Simple admin auth token")
+    serper_api_key: str = Field("", env="SERPER_API_KEY")
+    openai_api_key: str = Field("", env="OPENAI_API_KEY")
+    database_url: str = Field("sqlite:///./career_feed.db", env="DATABASE_URL")
+    admin_token: str = Field("", env="ADMIN_TOKEN")
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    class Config:
+        env_file = ".env"
+        env_file_encoding = "utf-8"
 
 
 @lru_cache()
