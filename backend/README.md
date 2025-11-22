@@ -15,6 +15,20 @@ This directory contains the FastAPI backend responsible for fetching, summarizin
    uvicorn app.main:app --reload
    ```
 
+## Database migrations
+
+Alembic is configured for managing schema changes. From the `backend/` directory:
+
+```bash
+# create a new migration after editing models
+alembic revision --autogenerate -m "describe change"
+
+# apply migrations to the configured DATABASE_URL
+alembic upgrade head
+```
+
+The initial migration (`0001_create_articles`) is already included; running `alembic upgrade head` will create the tables if they do not exist.
+
 ## Troubleshooting
 
 - **`ModuleNotFoundError: No module named 'sqlmodel'`** – this means your current
