@@ -1,8 +1,9 @@
 """Serper.dev client utilities."""
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
+import re
 from typing import Any, Dict, List, Optional
 
 import httpx
@@ -17,6 +18,20 @@ SERPER_ENDPOINT = "https://google.serper.dev/news"
 def _parse_published_at(value: Optional[str]) -> Optional[datetime]:
     if not value:
         return None
+    relative_match = re.match(r"^(\d+)\s+(minute|minutes|hour|hours|day|days|week|weeks|month|months)\s+ago$", value.strip().lower())
+    if relative_match:
+        amount = int(relative_match.group(1))
+        unit = relative_match.group(2)
+        if unit.startswith("minute"):
+            return datetime.utcnow() - timedelta(minutes=amount)
+        if unit.startswith("hour"):
+            return datetime.utcnow() - timedelta(hours=amount)
+        if unit.startswith("day"):
+            return datetime.utcnow() - timedelta(days=amount)
+        if unit.startswith("week"):
+            return datetime.utcnow() - timedelta(weeks=amount)
+        if unit.startswith("month"):
+            return datetime.utcnow() - timedelta(days=30 * amount)
     try:
         return datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError:
