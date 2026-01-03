@@ -41,6 +41,8 @@ def select_top_articles(results: Iterable[dict], limit: int = 5) -> List[dict]:
         if isinstance(published_at, datetime) and published_at < cutoff:
             continue
         relevance = _relevance_score(f"{title} {snippet}")
+        if relevance == 0:
+            continue
         recency_bonus = 0.0
         if isinstance(published_at, datetime):
             recency_bonus = max(0.0, (published_at - cutoff).total_seconds())

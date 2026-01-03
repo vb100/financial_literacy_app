@@ -36,6 +36,13 @@ def main() -> None:
             "published_at": now - timedelta(hours=30),
         },
         {
+            "title": "Career development webinar announced",
+            "link": "https://example.com/webinar",
+            "source": "Example",
+            "snippet": "A new workforce skills webinar for career growth.",
+            "published_at": now - timedelta(hours=6),
+        },
+        {
             "title": "Old career advice",
             "link": "https://example.com/old-career",
             "source": "Example",
